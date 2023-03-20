@@ -1,0 +1,28 @@
+print(datetime.datetime.now()-datetime.datetime(2023,1,1)) время с начала года (точка отсчёта)
+11 недель с начала года и 11 вторников
+с 20 марта будет 12 недель и 11 вторников
+
+import datetime
+import os
+
+# Get the current day of the week (Monday is 0, Tuesday is 1, etc.)
+today = datetime.datetime.today().weekday()
+
+# Check if it's Tuesday and if the script has not already been run on Tuesday in the current week
+if today == 1 and os.path.exists('tuesday_run.txt') == False:
+
+    # Choose a random message to send
+    messages = [
+        'Happy Tuesday!',
+        'It\'s Taco Tuesday!',
+        'Tuesday is the new Monday.',
+        'Tuesday: the day we wear pink.'
+    ]
+    message = messages[today % len(messages)]
+
+    # Send the message to the console
+    print(message)
+
+    # Create a file to indicate that the script has been run on Tuesday this week
+    with open('tuesday_run.txt', 'w') as f:
+        f.write(str(datetime.datetime.today().date()))

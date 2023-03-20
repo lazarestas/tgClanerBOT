@@ -1,0 +1,44 @@
+#include <curl/curl.h>
+
+// Function to send reminder message to Telegram group chat
+void sendReminder(std::string group_chat_id, std::string reminder_message, std::string api_token) {
+  CURL *curl;
+  CURLcode res;
+
+  // Set request URL
+  std::string url = "https://api.telegram.org/bot" + api_token + "/sendMessage";
+
+  // Set request data
+  std::string post_data = "chat_id=" + group_chat_id + "&text=" + reminder_message;
+
+  // Initialize cURL session
+  curl = curl_easy_init();
+  if(curl) {
+    // Set request options
+    curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, post_data.c_str());
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
+
+    // Execute request
+    res = curl_easy_perform(curl);
+
+    // Check for errors
+    if(res != CURLE_OK)
+      fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
+
+    // Cleanup cURL session
+    curl_easy_cleanup(curl);
+  }
+}
+
+int main(void) {
+  // Set group chat ID, reminder message, and bot API token
+  std::string group_chat_id = "<group_chat_id>";
+  std::string reminder_message = "Reminder: Time to clean!";
+  std::string api_token = "<bot_api_token>";
+
+  // Call sendReminder function to send reminder message to group chat
+  sendReminder(group_chat_id, reminder_message, api_token);
+
+  return 0;
+}

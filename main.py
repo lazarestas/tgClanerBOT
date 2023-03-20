@@ -23,7 +23,7 @@ def send_message(message):
     payload = {"chat_id": CHAT_ID, "text": message}
     response = requests.post(url, json=payload)
     if response.status_code != 200:
-        print(f"Error sending message: {response.content}")
+        logging.error(f"Error sending message: {response.content}")
 
 def count_weeks(date):
     """

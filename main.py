@@ -12,10 +12,10 @@ day_of_notify = 0
 
 # Define the messages to send
 messages = [
-    "@pidor1",
-    "@pidor2",
-    "@pidor3",
-    "@pidor4"
+    "@Nupellot короче ты знаешь что делать",
+    "@Samamobaky, прошу прощенияб не могли бы вы провести мытье полов?",
+    "@lazarestas тут не заигноришь уборочку",
+    "@Lnkawai время мыть шконку:))))"
 ]
 
 def send_message(message):
